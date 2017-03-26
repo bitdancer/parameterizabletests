@@ -56,7 +56,7 @@ list specifications is being re-used with multiple tests.
 
 The difference between positional arguments (or a list), and keyword arguments
 (or a dict), is in how the test names are generated.  In the keyword argument
-(or dictionary) form, they keyword/key is used to complete the test name.  In
+(or dictionary) form, the keyword/key is used to complete the test name.  In
 the positional argument (or list) form, the values of the arguments are
 stringified, and the values (and the keywords in the call specification, if
 any) are used to complete the test name.  We refer to these as 'auto-generated
@@ -75,10 +75,10 @@ while the second set above would generate tests named::
 
 The generated test names can be specified on the unittest command line to
 invoke that particular test.  For auto-generated names, this works only if the
-auto-generated name is a valid python identifier.  (Note that under Python 3.3,
-3.4, and 3.5, in order to get stable auto-generated names if there are multiple
-keyword arguments, you will need to set PYTHONHASHSEED, because otherwise the
-keyword parameters could be in a different order in the name from run to run.)
+auto-generated name is a valid python identifier.  Note that under Python 3.3,
+3.4, and 3.5 in order to get stable auto-generated names if there are multiple
+keyword arguments you will need to set PYTHONHASHSEED, because otherwise the
+keyword parameters could be in a different order in the name from run to run.
 
 You can also specify the special keyword argument ``_include_key`` to
 ``parameters``, in which case the key that names the parameter list
@@ -91,3 +91,5 @@ specification is passed as the first non-self argument to the test::
 ``key`` here will be ``a`` when ``arg1`` and ``arg2`` are ``(1, 2)``, and ``b``
 when they are ``(3, 4)``.
 
+All other keyword names starting with ``_`` are reserved, so such names cannot
+be used as parameter list specification names.
