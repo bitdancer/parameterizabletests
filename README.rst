@@ -8,12 +8,6 @@ need to stick with the standard library unittest framework, it has no built in
 way to do this.  This module is essentially a proposal for how to add this
 feature to the stdlib.
 
-This package consists of a single module, parameterizabletests, containing two
-decorators: parameterizable and parameters.  The former is a class decorator,
-and makes it possible to parameterize any test in the decorated class.  The
-second is a method decorator, and provides a way to specify the parameters to
-be used with a specific test.
-
 You can install the package by hand by just copying the module to an
 appropriate location, or you can install it using pip.
 
