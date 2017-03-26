@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/bitdancer/parameterizabletests.svg?branch=master
+   :target: https://travis-ci.org/bitdancer/parameterizabletests
+
 Parameterizing Tests Using the stdlib unittest
 ==============================================
 
