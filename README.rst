@@ -18,12 +18,12 @@ Usage
 This module provides two decorators and a constructor: a class decorator named
 ``parameterizable``, a method decorator named ``parameters``, and a parameter
 list constructor named ``C`` (short for 'call specification').  In order for
-the parameters decorator to do anything useful, the test class must be
-decorated with the parameterizable decorator.
+the ``parameters`` decorator to do anything useful, the test class must be
+decorated with the ``parameterizable`` decorator.
 
-parameterizable is a simple class decorator that takes no arguments.
+``parameterizable`` is a simple class decorator that takes no arguments.
 
-Parameter list specifications are simply parameter lists passed to the
+Parameter list specifications are normal function call arguments, passed to the
 constructor C.  Thus, if we want to pass two positional arguments to our
 parameterized test, we write::
 
@@ -33,7 +33,7 @@ If we also want to pass the keyword argument ``foo``, we write::
 
     C(1, 2, foo=3)
 
-Parameter list specifications can be passed to the parameters decorator as
+Parameter list specifications can be passed to the ``parameters`` decorator as
 positional arguments, as keyword arguments, or as single argument lists or
 dicts.  That is, all of the following result in the specified parameters being
 passed to the decorated test function::
@@ -48,14 +48,14 @@ passed to the decorated test function::
     @parameters(params)
     @parameters(**params)
 
-The reason all of these forms is supported is that it is more natural to use
-positional or keyword arguments when using a single set of parameter lists for
-a single test function, while it is more natural to pass s single argument list
-or dict to the parameters decorator when the same set of parameter lists is
-being passed to more than one test.
+The reason all of these forms is supported is that it is more natural to pass
+positional or keyword arguments to ``parameters`` when specifying parameter
+list specifications for a single test function, while it is more natural to
+pass a single-argument list or dict to ``parameters`` when a set of parameter
+list specifications is being re-used with multiple tests.
 
-The difference between positional arguments or a list, and keyword arguments
-or a dict, is in how the test names are generated.  If the above parameter
+The difference between positional arguments (or a list), and keyword arguments
+(or a dict), is in how the test names are generated.  If the above parameter
 lists were being used to decorate a test function named ``test_foo``,
 the first set above would generate tests named::
 
@@ -75,13 +75,13 @@ set PYTHONHASHSEED, because otherwise the keyword parameters could be in a
 different order in the name from run to run.)
 
 You can also specify the special keyword argument ``_include_key`` to
-``@parameterize``, in which case the key that names the parameter list is
-passed as the first non-self argument to the test::
+``parameters``, in which case the key that names the parameter list
+specification is passed as the first non-self argument to the test::
 
     @parameters(a=C(1, 2), b=C(3, 4), _include_key=True)
     def test_foo(self, key, arg1, arg2):
         pass
 
-key here will be ``a`` when ``arg1`` and ``arg2`` are ``(1, 2)``, and ``b``
+``key`` here will be ``a`` when ``arg1`` and ``arg2`` are ``(1, 2)``, and ``b``
 when they are ``(3, 4)``.
 
