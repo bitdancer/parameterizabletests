@@ -6,4 +6,6 @@ python:
     - "3.6"
     - "3.6-dev"
     - "3.7-dev"
-script: python -m unittest discover
+install: pip install coverage
+script: coverage run -m unittest discover
+after_script: codecov
