@@ -135,6 +135,21 @@ class TestParaterizableTests(unittest.TestCase):
                 def test_bar(self, *args):
                     pass
 
+    def test_using_include_key_multiple_times_works(self):
+        res = []
+        @parameterizable
+        class Test(unittest.TestCase):
+            params = dict(a=C(1), b=C(2))
+            @parameters(params, _include_key=True)
+            def test_foo(self, name, val):
+                res.append(('foo', name, val))
+            @parameters(params, _include_key=True)
+            def test_bar(self, name, val):
+                res.append(('bar', name, val))
+        self.runTest(Test, 'test_foo_a')
+        self.runTest(Test, 'test_bar_b')
+        self.assertEqual([('foo', 'a', 1), ('bar', 'b', 2)], res)
+
 
 if __name__=='__main__':
     unittest.main()

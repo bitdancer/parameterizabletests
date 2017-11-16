@@ -72,9 +72,6 @@ key here will be 'a' when arg1 and arg2 are (1, 2), and 'b' when they are (3,
 
 """
 
-from functools import wraps
-
-
 valid_settings = ['_include_key']
 
 
@@ -93,7 +90,7 @@ class C:
         return '__'.join(filter(None, (args, kw)))
 
     def prepend_positional(self, value):
-        self.args = (value,) + self.args
+        return C(*((value,) + self.args), **self.kw)
 
     def invoke(self, func):
         return func(*self.args, **self.kw)
@@ -142,7 +139,7 @@ def parameterizable(cls):
             parameters = attr._parameters_
             if attr._settings_.get('_include_key'):
                 for k, v in parameters.items():
-                    parameters[k].prepend_positional(k)
+                    parameters[k] = parameters[k].prepend_positional(k)
             impl_name = '__' + name
             delattr(cls, name)
             setattr(cls, impl_name, attr)
